@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +27,7 @@ class TaskController extends Controller
         $task = Task::create($request->all());
 
         if ($task) {
-            return $task;
+            return response()->json($task,201);
         } else {
             return  [
                 'message' => 'Erro ao criar tarefa',
@@ -37,8 +38,12 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show(string $id)
     {
+       $task = Task::find($id);
+       if($task === null){
+            return response()->json(['erro' => 'Não existe uma tarefa com esse id'],404);
+       }
         return $task;
     }
 
@@ -47,8 +52,13 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Task $task)
-    {
+    public function update(Request $request, string $id)
+    {   
+        $task = Task::find($id);
+        if($task === null){
+            return response()->json(['erro' => 'Não foi possivel atualizar a tarefa, id não existe'],404);
+
+       }
         $task->update($request->all());
         return $task;
     }
@@ -56,11 +66,16 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
-    {  
+    public function destroy(string $id)
+    {   
+        $task = Task::find($id);
+        if($task === null){
+            return response()->json(['erro' => 'Não foi possivel deletar a tarefa'],404);
+
+       }
         $task->delete();
         return  [
-            'message' => "A tarefa $task->title foi deletada com sucesso",
+            'message' => "A tarefa foi deletada com sucesso",
         ];
     }
 }
