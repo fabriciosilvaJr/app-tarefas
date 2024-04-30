@@ -24,15 +24,18 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $task = Task::create($request->all());
+        
+        $rules = [
+            'user_id' => 'required',
+            'title'   => 'required',
+            'description' => 'required'
 
-        if ($task) {
-            return response()->json($task,201);
-        } else {
-            return  [
-                'message' => 'Erro ao criar tarefa',
-            ];
-        }
+        ];
+        $feedback = ['required' => 'O campo :attribute é obrigatório'];
+        $request->validate($rules, $feedback);
+        $task = Task::create($request->all());
+        return response()->json($task,201);
+        
     }
 
     /**
