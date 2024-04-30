@@ -57,7 +57,10 @@ class TaskController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Task $task)
-    {
-        //
+    {  
+        $task->delete();
+        return  [
+            'message' => "A tarefa $task->title foi deletada com sucesso",
+        ];
     }
 }
