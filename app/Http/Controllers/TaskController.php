@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Repositories\TaskRepository;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -14,15 +15,15 @@ class TaskController extends Controller
     {
         $this->task = $task;
     }
-    
+
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {    
-      
-        $tasks = $this->task->with('user')->get();
-        return  $tasks;
+    {
+
+        $taskRepository = new TaskRepository($this->task);
+        return  $taskRepository->getAllTask();
     }
 
 
@@ -32,23 +33,22 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-      
-        $request->validate($this->task->rules(), $this->task->feedback());
-        $taskNew = $this->task::create($request->all());
-        return response()->json($taskNew,201);
-        
+        $taskRepository = new TaskRepository($this->task);
+        $request->validate($taskRepository->getModel()->rules(), $taskRepository->getModel()->feedback());
+        $taskNew = $taskRepository->createTask($request->all());
+        return response()->json($taskNew, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {  
-    
-       $task = $this->task->with('user')->find($id);
-       if($task === null){
-            return response()->json(['erro' => 'Não existe uma tarefa com esse id'],404);
-       }
+    public function show($id)
+    {
+        $taskRepository = new TaskRepository($this->task);
+        $task = $taskRepository->getByIdTask($id);
+        if ($task === null) {
+            return response()->json(['erro' => 'Não existe uma tarefa com esse id'], 404);
+        }
         return $task;
     }
 
@@ -57,29 +57,27 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {   
-        $task = $this->task->find($id);
-        if($task === null){
-            return response()->json(['erro' => 'Não foi possivel atualizar a tarefa, id não existe'],404);
-
-       }
-        $request->validate($task->rules(), $task->feedback());
-        $task->update($request->all());
+    public function update(Request $request, $id)
+    {
+        $taskRepository = new TaskRepository($this->task);
+        $request->validate($taskRepository->getModel()->rules(), $taskRepository->getModel()->feedback());
+        $task = $taskRepository->updateTask($id, $request->all());
+        if ($task === null) {
+            return response()->json(['erro' => 'Não foi possível atualizar a tarefa, id não existe'], 404);
+        }
         return $task;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {   
-        $task = $this->task->find($id);
-        if($task === null){
-            return response()->json(['erro' => 'Não foi possivel deletar a tarefa'],404);
-
-       }
-        $task->delete();
+    public function destroy($id)
+    {
+        $taskRepository = new TaskRepository($this->task);
+        $task = $taskRepository->deleteTask($id);;
+        if ($task === null) {
+            return response()->json(['erro' => 'Não foi possivel deletar a tarefa, id não existe'], 404);
+        }
         return  [
             'message' => "A tarefa foi deletada com sucesso",
         ];
