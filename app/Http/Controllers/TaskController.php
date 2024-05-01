@@ -55,6 +55,7 @@ class TaskController extends Controller
             return response()->json(['erro' => 'Não foi possivel atualizar a tarefa, id não existe'],404);
 
        }
+        $request->validate($task->rules(), $task->feedback());
         $task->update($request->all());
         return $task;
     }

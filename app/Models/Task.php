@@ -13,7 +13,7 @@ class Task extends Model
     public function rules(){
       return [
         'user_id' => 'required',
-        'title'   => 'required',
+        'title'   => 'required|min:3',
         'description' => 'required'
 
     ];
@@ -21,7 +21,10 @@ class Task extends Model
     }
 
     public function feedback(){
-      return ['required' => 'O campo :attribute é obrigatório'];
+      return [
+         'required' => 'O campo :attribute é obrigatório',
+         'title.min' => 'O campo title deve ter no mínimo 3 caracteres'
+      ];
 
     }
 
