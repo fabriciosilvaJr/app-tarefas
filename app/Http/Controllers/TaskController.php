@@ -7,14 +7,21 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    protected $task;
+
+
+    public function __construct(Task $task)
+    {
+        $this->task = $task;
+    }
     
     /**
      * Display a listing of the resource.
      */
     public function index()
     {    
-        $task = new Task();
-        $tasks = $task->with('user')->get();
+      
+        $tasks = $this->task->with('user')->get();
         return  $tasks;
     }
 
@@ -25,9 +32,9 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $task = new Task();
-        $request->validate($task->rules(), $task->feedback());
-        $taskNew = $task::create($request->all());
+      
+        $request->validate($this->task->rules(), $this->task->feedback());
+        $taskNew = $this->task::create($request->all());
         return response()->json($taskNew,201);
         
     }
@@ -37,12 +44,12 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {  
-       $task = new Task();
-       $taskUser = $task->with('user')->find($id);
-       if($taskUser === null){
+    
+       $task = $this->task->with('user')->find($id);
+       if($task === null){
             return response()->json(['erro' => 'Não existe uma tarefa com esse id'],404);
        }
-        return $taskUser;
+        return $task;
     }
 
 
@@ -52,7 +59,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {   
-        $task = Task::find($id);
+        $task = $this->task->find($id);
         if($task === null){
             return response()->json(['erro' => 'Não foi possivel atualizar a tarefa, id não existe'],404);
 
@@ -67,7 +74,7 @@ class TaskController extends Controller
      */
     public function destroy(string $id)
     {   
-        $task = Task::find($id);
+        $task = $this->task->find($id);
         if($task === null){
             return response()->json(['erro' => 'Não foi possivel deletar a tarefa'],404);
 
