@@ -12,8 +12,9 @@ class TaskController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $tasks = Task::all();
+    {    
+        $task = new Task();
+        $tasks = $task->with('user')->get();
         return  $tasks;
     }
 
@@ -35,12 +36,13 @@ class TaskController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-       $task = Task::find($id);
-       if($task === null){
+    {  
+       $task = new Task();
+       $taskUser = $task->with('user')->find($id);
+       if($taskUser === null){
             return response()->json(['erro' => 'Não existe uma tarefa com esse id'],404);
        }
-        return $task;
+        return $taskUser;
     }
 
 
