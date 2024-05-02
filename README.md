@@ -49,13 +49,13 @@ Para criar um usuário diretamente na API para testes, você pode usar o Postman
 - **Método:** `POST`
 - **Corpo da Requisição:**
 
-json
+```json
 {
   "name": "user",
   "email": "usertest@email.com",
   "password": "12345678"
 }
-
+```
 
 
 ### Para fazer login, utilize a seguinte URL:
