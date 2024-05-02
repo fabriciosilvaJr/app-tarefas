@@ -41,7 +41,7 @@ Agora que a api está configurada, você pode executá-la com o seguinte comando
 
 A API estará disponível em [http://localhost:8000/api](http://localhost:8000/api).
 
-### Criando um usuário para testes
+## Criando um usuário para testes
 
 Para criar um usuário diretamente para testes, você pode usar o Postman ou Insomnia.
 
@@ -58,7 +58,7 @@ Para criar um usuário diretamente para testes, você pode usar o Postman ou Ins
 ```
 
 
-### Para fazer login, utilize a seguinte URL:
+## Para fazer login, utilize a seguinte URL:
 
 - **URL:** `http://localhost:8000/api/login`
 - **Método:** `POST`
@@ -73,7 +73,7 @@ Para criar um usuário diretamente para testes, você pode usar o Postman ou Ins
 
 O endpoint de login retorna o nome do usuário, o ID e o token.
 
-### Para criar uma tarefa, utilize a seguinte URL:
+## Para criar uma tarefa, utilize a seguinte URL:
 - **URL:** `http://localhost:8000/api/task`
 - **Método:** `POST`
 - **Corpo da Requisição:**
@@ -85,16 +85,16 @@ O endpoint de login retorna o nome do usuário, o ID e o token.
   "user_id": "ID_do_Usuário"
 }
 ```
-### Listar todas as tarefas:
+## Listar todas as tarefas:
 - **URL:** `http://localhost:8000/api/task/`
 - **Método:** `GET`
   
-### Para obter uma tarefa por ID, utilize a seguinte URL:
+## Para obter uma tarefa por ID, utilize a seguinte URL:
 - **URL:** `http://localhost:8000/api/task/{id}`
 - **Método:** `GET`
 
 
-### Atualizar uma tarefa, utilize a seguinte URL:
+## Atualizar uma tarefa, utilize a seguinte URL:
 - **URL:** `http://localhost:8000/api/task/{id}`
 - **Método:**  `PUT`
 - **Corpo da Requisição:**
@@ -106,7 +106,7 @@ O endpoint de login retorna o nome do usuário, o ID e o token.
   "user_id": "Novo_ID_do_Usuário"
 }
 ```
-### Exclua uma tarefa utilizando a seguinte URL:
+## Exclua uma tarefa utilizando a seguinte URL:
 - **URL:** `http://localhost:8000/api/task/{id}`
 - **Método:** `DELETE`
 
