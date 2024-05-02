@@ -32,12 +32,12 @@ Certifique-se de que você possui as seguintes dependências instaladas:
    
 `
     
-## Executando o Aplicativo
+## Executando a api
 
 Agora que o aplicativo está configurado, você pode executá-lo com o seguinte comando:
 `php artisan serve`
 
-## Utilizando a API
+## Utilizando a api
 
 A API estará disponível em [http://localhost:8000/api](http://localhost:8000/api).
 
