@@ -32,9 +32,9 @@ Certifique-se de que você possui as seguintes dependências instaladas:
    
 `
     
-## Executando a api
+## Executando
 
-Agora que o aplicativo está configurado, você pode executá-lo com o seguinte comando:
+Agora que a api está configurada, você pode executá-la com o seguinte comando:
 `php artisan serve`
 
 ## Utilizando a api
@@ -43,7 +43,7 @@ A API estará disponível em [http://localhost:8000/api](http://localhost:8000/a
 
 ### Criando um usuário para testes
 
-Para criar um usuário diretamente na API para testes, você pode usar o Postman ou Insomnia.
+Para criar um usuário diretamente para testes, você pode usar o Postman ou Insomnia.
 
 - **URL:** `http://localhost:8000/api/register`
 - **Método:** `POST`
