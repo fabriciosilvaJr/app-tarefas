@@ -37,14 +37,19 @@ Certifique-se de que você possui as seguintes dependências instaladas:
 Agora que o aplicativo está configurado, você pode executá-lo com o seguinte comando:
 `php artisan serve`
 
-A API estará disponível em http://localhost:8000/api.
+## Utilizando a API
+
+A API estará disponível em [http://localhost:8000/api](http://localhost:8000/api).
+
+### Criando um usuário para testes
 
 Para criar um usuário diretamente na API para testes, você pode usar o Postman ou Insomnia.
 
-URL: http://localhost:8000/api/register
-Método: POST
-Corpo da Requisição:
+- **URL:** `http://localhost:8000/api/register
+- **Método:** `POST`
+- **Corpo da Requisição:**
 
+json
 {
   "name": "user",
   "email": "usertest@email.com",
@@ -52,11 +57,13 @@ Corpo da Requisição:
 }
 
 
-Para fazer login, utilize a seguinte URL:
 
-URL: http://localhost:8000/api/login
-Método: POST
-Corpo da Requisição:
+### Para fazer login, utilize a seguinte URL:
+
+- **URL:** `http://localhost:8000/api/login
+- **Método:** `POST`
+- **Corpo da Requisição:**
+json
 {
   "email": "usertest@email.com",
   "password": "12345678"
@@ -64,17 +71,11 @@ Corpo da Requisição:
 
 O endpoint de login retorna o nome do usuário, o ID e o token.
 
-Para criar uma tarefa, utilize a seguinte URL:
+### Para criar uma tarefa, utilize a seguinte URL:
+- **URL:** `http://localhost:8000/api/task
+- **Método:** `POST`
+- **Corpo da Requisição:**
 
-URL: http://localhost:8000/api/task
-Método: POST
-Corpo da Requisição:
-
-{
-  "title": "Título da Tarefa",
-  "description": "Descrição da Tarefa",
-  "user_id": "ID_do_Usuário"
-}
 
 
 
