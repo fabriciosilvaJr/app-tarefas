@@ -45,7 +45,7 @@ A API estará disponível em [http://localhost:8000/api](http://localhost:8000/a
 
 Para criar um usuário diretamente na API para testes, você pode usar o Postman ou Insomnia.
 
-- **URL:** `http://localhost:8000/api/register
+- **URL:** `http://localhost:8000/api/register`
 - **Método:** `POST`
 - **Corpo da Requisição:**
 
@@ -60,24 +60,53 @@ Para criar um usuário diretamente na API para testes, você pode usar o Postman
 
 ### Para fazer login, utilize a seguinte URL:
 
-- **URL:** `http://localhost:8000/api/login
+- **URL:** `http://localhost:8000/api/login`
 - **Método:** `POST`
 - **Corpo da Requisição:**
-json
+  
+```json
 {
   "email": "usertest@email.com",
   "password": "12345678"
 }
+```
 
 O endpoint de login retorna o nome do usuário, o ID e o token.
 
 ### Para criar uma tarefa, utilize a seguinte URL:
-- **URL:** `http://localhost:8000/api/task
+- **URL:** `http://localhost:8000/api/task`
 - **Método:** `POST`
 - **Corpo da Requisição:**
 
+```json
+{
+  "title": "Título da Tarefa",
+  "description": "Descrição da Tarefa",
+  "user_id": "ID_do_Usuário"
+}
+```
+### Listar todas as tarefas:
+- **URL:** `http://localhost:8000/api/task/`
+- **Método:** `GET`
+  
+### Para obter uma tarefa por ID, utilize a seguinte URL:
+- **URL:** `http://localhost:8000/api/task/{id}`
+- **Método:** `GET`
 
 
-
-
+### Atualizar uma tarefa, utilize a seguinte URL:
+- **URL:** `http://localhost:8000/api/task/{id}`
+- **Método:**  `PUT`
+- **Corpo da Requisição:**
+  
+```json
+{
+  "title": "Novo Título da Tarefa",
+  "description": "Nova Descrição da Tarefa",
+  "user_id": "Novo_ID_do_Usuário"
+}
+```
+### Exclua uma tarefa utilizando a seguinte URL:
+- **URL:** `http://localhost:8000/api/task/{id}`
+- **Método:** `DELETE`
 
